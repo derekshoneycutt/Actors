@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ActorMicroHttp/ActorMicroHttp.csproj" />
+  <Project Path="Actors/Actors.csproj" />
+</Solution>
