@@ -3,6 +3,7 @@ using Actors.Supervising;
 using Actors.Mailbox;
 using Microsoft.Extensions.DependencyInjection;
 using Actors.Errors;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Actors;
 
@@ -22,7 +23,9 @@ public static class ActorServiceCollectionExtensions
     /// <param name="configureOptions">Optional delegate used to configure the settings of the
     ///     actor at construction time.</param>
     /// <returns>The service collection for chaining.</returns>
-    public static IServiceCollection AddActor<TActor, TMessage>(
+    public static IServiceCollection AddActor<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TActor,
+        TMessage>(
         this IServiceCollection services,
         string address,
         Func<IServiceProvider, TActor> constructor,
@@ -63,7 +66,9 @@ public static class ActorServiceCollectionExtensions
     /// <param name="configureOptions">Optional delegate used to configure the settings of the
     ///     actor at construction time.</param>
     /// <returns>The service collection for chaining.</returns>
-    public static IServiceCollection AddActor<TActor, TMessage>(
+    public static IServiceCollection AddActor<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TActor,
+        TMessage>(
         this IServiceCollection services,
         string address,
         Action<SupervisedActorOptions>? configureOptions = null)
@@ -142,7 +147,8 @@ public static class ActorServiceCollectionExtensions
     /// <param name="configureOptions">Optional delegate used to configure the settings of the
     ///     actor at construction time.</param>
     /// <returns>The service collection for chaining.</returns>
-    public static IServiceCollection AddActorSupervision<TErrorActor>(
+    public static IServiceCollection AddActorSupervision<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TErrorActor>(
         this IServiceCollection services,
         Action<HostedSupervisorOptions>? configureOptions = null)
         where TErrorActor : StandardErrorActor
