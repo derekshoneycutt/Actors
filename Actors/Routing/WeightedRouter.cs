@@ -41,7 +41,7 @@ public sealed class WeightedRouter<TMessage>
     /// <param name="message">The message to process</param>
     /// <param name="cancellationToken">The token used to cancel the asynchronous operation</param>
     /// <returns>A Task that represents the asynchronous operation</returns>
-    protected override async Task ProcessMessageAsync(
+    protected override async ValueTask ProcessMessageAsync(
         TMessage message, CancellationToken cancellationToken)
     {
         if (Actors.Count < 1)

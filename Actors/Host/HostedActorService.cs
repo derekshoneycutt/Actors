@@ -33,7 +33,7 @@ internal sealed class HostedActorService
     /// <returns>A Task that completes at the end of the asynchronous operation</returns>
     public Task StartAsync(CancellationToken cancellationToken)
     {
-        _ = _actorHostRegistry.RunAsync(cancellationToken);
+        _ = _actorHostRegistry.RunAsync(cancellationToken).AsTask();
         return Task.CompletedTask;
     }
 

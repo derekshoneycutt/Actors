@@ -15,7 +15,7 @@ public sealed class LambdaActor<TMessage>
     /// The delegate invoked to handle each incoming message.
     /// </summary>
     private readonly Func<LambdaActor<TMessage>, TMessage, ISupervisor,
-        CancellationToken, Task> _handler;
+        CancellationToken, ValueTask> _handler;
 
     /// <summary>
     /// The actor host to allow function with in the lambda
@@ -33,7 +33,7 @@ public sealed class LambdaActor<TMessage>
     /// Uses the default unbounded provider when omitted.
     /// </param>
     public LambdaActor(
-        Func<LambdaActor<TMessage>, TMessage, ISupervisor, CancellationToken, Task> handler,
+        Func<LambdaActor<TMessage>, TMessage, ISupervisor, CancellationToken, ValueTask> handler,
         ISupervisor host,
         IActorRef<StandardError>? errorActor = null,
         IMailboxProvider? mailboxChannelProvider = null)
@@ -51,7 +51,7 @@ public sealed class LambdaActor<TMessage>
     /// <param name="message">The input message to process.</param>
     /// <param name="cancellationToken">Cancellation token for async operations.</param>
     /// <returns>A task that completes when the handler completes.</returns>
-    protected override Task ProcessMessageAsync(
+    protected override ValueTask ProcessMessageAsync(
         TMessage message,
         CancellationToken cancellationToken)
     {

@@ -16,7 +16,7 @@ public sealed class HttpParser
     {
     }
 
-    protected override async Task ProcessMessageAsync(
+    protected override async ValueTask ProcessMessageAsync(
         HttpTextRequest message,
         CancellationToken cancellationToken)
     {

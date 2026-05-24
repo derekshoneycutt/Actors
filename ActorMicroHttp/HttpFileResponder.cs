@@ -21,7 +21,7 @@ public sealed class HttpFileResponder
         _options = options;
     }
 
-    protected override async Task ProcessMessageAsync(
+    protected override async ValueTask ProcessMessageAsync(
         HttpParsedRequest message,
         CancellationToken cancellationToken)
     {

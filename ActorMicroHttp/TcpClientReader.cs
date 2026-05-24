@@ -17,7 +17,7 @@ public sealed class TcpClientReader
     {
     }
 
-    protected override async Task ProcessMessageAsync(
+    protected override async ValueTask ProcessMessageAsync(
         TcpClientReaderInitMessage message,
         CancellationToken cancellationToken)
     {

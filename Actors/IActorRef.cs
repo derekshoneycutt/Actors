@@ -30,5 +30,5 @@ public interface IActorRef<in TMessage>
     /// Cancellation token controlling the enqueue operation.
     /// </param>
     /// <returns>A task that completes when the message is enqueued.</returns>
-    Task SendAsync(TMessage message, CancellationToken cancellationToken);
+    ValueTask SendAsync(TMessage message, CancellationToken cancellationToken);
 }

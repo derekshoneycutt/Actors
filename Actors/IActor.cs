@@ -11,7 +11,7 @@ public interface IActor
     /// </summary>
     /// <param name="cancellationToken">Cancellation token controlling actor shutdown.</param>
     /// <returns>A task that completes when all mailbox messages are processed.</returns>
-    Task RunAsync(CancellationToken cancellationToken);
+    ValueTask RunAsync(CancellationToken cancellationToken);
 }
 
 /// <summary>
@@ -27,5 +27,5 @@ public interface IActor<in TMessage>
     /// <param name="message">Message to enqueue for processing.</param>
     /// <param name="cancellationToken">Cancellation token controlling enqueue behavior.</param>
     /// <returns>A task that completes when the message is accepted.</returns>
-    Task SendAsync(TMessage message, CancellationToken cancellationToken);
+    ValueTask SendAsync(TMessage message, CancellationToken cancellationToken);
 }

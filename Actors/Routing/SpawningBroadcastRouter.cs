@@ -36,7 +36,7 @@ public sealed class SpawningBroadcastRouter<TActor, TMessage>
     /// <param name="message">The message to process</param>
     /// <param name="cancellationToken">The token used to cancel the asynchronous operation</param>
     /// <returns>A Task representing the asynchronous operation.</returns>
-    protected override async Task ProcessMessageAsync(
+    protected override async ValueTask ProcessMessageAsync(
         TMessage message, CancellationToken cancellationToken)
     {
         if (Actors.Count < 1)
@@ -48,7 +48,7 @@ public sealed class SpawningBroadcastRouter<TActor, TMessage>
         for (int i = 0; i < Actors.Count; ++i)
         {
             IActorRef<TMessage> actor = Actors[i];
-            tasks[i] = actor.SendAsync(message, cancellationToken);
+            tasks[i] = actor.SendAsync(message, cancellationToken).AsTask();
         }
         await Task.WhenAll(tasks).ConfigureAwait(false);
     }

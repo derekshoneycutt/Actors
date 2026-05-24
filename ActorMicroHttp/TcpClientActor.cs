@@ -21,7 +21,7 @@ public sealed class TcpClientActor
         _supervisor = supervisor;
     }
 
-    protected override async Task ProcessMessageAsync(
+    protected override async ValueTask ProcessMessageAsync(
         TcpClientInitMessage message,
         CancellationToken cancellationToken)
     {

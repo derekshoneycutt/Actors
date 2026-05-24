@@ -93,7 +93,7 @@ public class Supervisor
     {
         try
         {
-            Task runTask = state.Actor.RunAsync(cancellationToken);
+            ValueTask runTask = state.Actor.RunAsync(cancellationToken);
             state.Status = ActorStatus.Running;
             await runTask.ConfigureAwait(false);
             state.Status = ActorStatus.Stopped;
@@ -218,7 +218,7 @@ public class Supervisor
     /// <param name="message">The message to process.</param>
     /// <param name="cancellationToken">Cancellation token for async operations.</param>
     /// <returns>A task that completes when processing is done.</returns>
-    protected override async Task ProcessMessageAsync(
+    protected override async ValueTask ProcessMessageAsync(
         SupervisorMessage message, CancellationToken cancellationToken)
     {
         switch (message)
@@ -629,7 +629,7 @@ public class Supervisor
     /// <returns>A Task that returns the reference handle to the new actor when it is spawned successfully.</returns>
     public IActorRef<TMessage> Spawn<TMessage>(
         string address,
-        Func<LambdaActor<TMessage>, TMessage, ISupervisor, CancellationToken, Task> lambda,
+        Func<LambdaActor<TMessage>, TMessage, ISupervisor, CancellationToken, ValueTask> lambda,
         IMailboxProvider? mailboxProvider = null)
     {
         return Spawn<LambdaActor<TMessage>, TMessage>(
@@ -648,7 +648,7 @@ public class Supervisor
     /// <returns>A Task that returns the reference handle to the new actor when it is spawned successfully.</returns>
     public IActorRef<TMessage> Spawn<TMessage>(
         string address,
-        Func<LambdaActor<TMessage>, TMessage, ISupervisor, CancellationToken, Task> lambda,
+        Func<LambdaActor<TMessage>, TMessage, ISupervisor, CancellationToken, ValueTask> lambda,
         SupervisedActorOptions options,
         IMailboxProvider? mailboxProvider = null)
     {
@@ -670,7 +670,7 @@ public class Supervisor
     public IActorRef<TMessage> Spawn<TMessage>(
         string parentAddress,
         string address,
-        Func<LambdaActor<TMessage>, TMessage, ISupervisor, CancellationToken, Task> lambda,
+        Func<LambdaActor<TMessage>, TMessage, ISupervisor, CancellationToken, ValueTask> lambda,
         IMailboxProvider? mailboxProvider = null)
     {
         IActorRef parent = FindActor(parentAddress);
@@ -690,7 +690,7 @@ public class Supervisor
     public IActorRef<TMessage> Spawn<TMessage>(
         string parentAddress,
         string address,
-        Func<LambdaActor<TMessage>, TMessage, ISupervisor, CancellationToken, Task> lambda,
+        Func<LambdaActor<TMessage>, TMessage, ISupervisor, CancellationToken, ValueTask> lambda,
         SupervisedActorOptions options,
         IMailboxProvider? mailboxProvider = null)
     {
@@ -710,7 +710,7 @@ public class Supervisor
     public IActorRef<TMessage> Spawn<TMessage>(
         IActorRef parent,
         string address,
-        Func<LambdaActor<TMessage>, TMessage, ISupervisor, CancellationToken, Task> lambda,
+        Func<LambdaActor<TMessage>, TMessage, ISupervisor, CancellationToken, ValueTask> lambda,
         IMailboxProvider? mailboxProvider = null)
     {
         return Spawn<LambdaActor<TMessage>, TMessage>(
@@ -732,7 +732,7 @@ public class Supervisor
     public IActorRef<TMessage> Spawn<TMessage>(
         IActorRef parent,
         string address,
-        Func<LambdaActor<TMessage>, TMessage, ISupervisor, CancellationToken, Task> lambda,
+        Func<LambdaActor<TMessage>, TMessage, ISupervisor, CancellationToken, ValueTask> lambda,
         SupervisedActorOptions options,
         IMailboxProvider? mailboxProvider = null)
     {
@@ -757,7 +757,7 @@ public class Supervisor
         string address,
         TState initialState,
         Func<LambdaMachine<TMessage, TState>, TMessage, TState, ISupervisor,
-            CancellationToken, Task<TState?>> lambda,
+            CancellationToken, ValueTask<TState?>> lambda,
         IMailboxProvider? mailboxProvider = null)
         where TState : MachineState
     {
@@ -780,7 +780,7 @@ public class Supervisor
         string address,
         TState initialState,
         Func<LambdaMachine<TMessage, TState>, TMessage, TState, ISupervisor,
-            CancellationToken, Task<TState?>> lambda,
+            CancellationToken, ValueTask<TState?>> lambda,
         SupervisedActorOptions options,
         IMailboxProvider? mailboxProvider = null)
         where TState : MachineState
@@ -806,7 +806,7 @@ public class Supervisor
         string address,
         TState initialState,
         Func<LambdaMachine<TMessage, TState>, TMessage, TState, ISupervisor,
-            CancellationToken, Task<TState?>> lambda,
+            CancellationToken, ValueTask<TState?>> lambda,
         IMailboxProvider? mailboxProvider = null)
         where TState : MachineState
     {
@@ -830,7 +830,7 @@ public class Supervisor
         string address,
         TState initialState,
         Func<LambdaMachine<TMessage, TState>, TMessage, TState, ISupervisor,
-            CancellationToken, Task<TState?>> lambda,
+            CancellationToken, ValueTask<TState?>> lambda,
         SupervisedActorOptions options,
         IMailboxProvider? mailboxProvider = null)
         where TState : MachineState
@@ -854,7 +854,7 @@ public class Supervisor
         string address,
         TState initialState,
         Func<LambdaMachine<TMessage, TState>, TMessage, TState, ISupervisor,
-            CancellationToken, Task<TState?>> lambda,
+            CancellationToken, ValueTask<TState?>> lambda,
         IMailboxProvider? mailboxProvider = null)
         where TState : MachineState
     {
@@ -880,7 +880,7 @@ public class Supervisor
         string address,
         TState initialState,
         Func<LambdaMachine<TMessage, TState>, TMessage, TState, ISupervisor,
-            CancellationToken, Task<TState?>> lambda,
+            CancellationToken, ValueTask<TState?>> lambda,
         SupervisedActorOptions options,
         IMailboxProvider? mailboxProvider = null)
         where TState : MachineState

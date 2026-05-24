@@ -29,7 +29,7 @@ internal sealed class SupervisedActorRef<TMessage>(
     /// Cancellation token controlling the enqueue operation.
     /// </param>
     /// <returns>A task that completes when the message is enqueued.</returns>
-    public Task SendAsync(TMessage message, CancellationToken cancellationToken)
+    public ValueTask SendAsync(TMessage message, CancellationToken cancellationToken)
     {
         return _actor.SendAsync(message, cancellationToken);
     }

@@ -17,7 +17,7 @@ public sealed class LambdaMachine<TMessage, TState>
     /// The delegate that defines the actor's behavior.
     /// </summary>
     private readonly Func<LambdaMachine<TMessage, TState>, TMessage, TState, ISupervisor,
-        CancellationToken, Task<TState?>> _handler;
+        CancellationToken, ValueTask<TState?>> _handler;
 
     /// <summary>
     /// The actor host to allow function with in the lambda
@@ -38,7 +38,7 @@ public sealed class LambdaMachine<TMessage, TState>
     public LambdaMachine(
         TState initialState,
         Func<LambdaMachine<TMessage, TState>, TMessage, TState, ISupervisor,
-            CancellationToken, Task<TState?>> handler,
+            CancellationToken, ValueTask<TState?>> handler,
         ISupervisor host,
         IActorRef<StandardError>? errorActor = null,
         IMailboxProvider? mailboxChannelProvider = null)
@@ -57,7 +57,7 @@ public sealed class LambdaMachine<TMessage, TState>
     /// <param name="currentState">Snapshot of the current state at message arrival time.</param>
     /// <param name="cancellationToken">Cancellation token for async operations.</param>
     /// <returns>New state to apply, or null for no state change.</returns>
-    protected override Task<TState?> ProcessMessageWithStateAsync(
+    protected override ValueTask<TState?> ProcessMessageWithStateAsync(
         TMessage message,
         TState currentState,
         CancellationToken cancellationToken)

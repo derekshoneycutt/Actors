@@ -43,7 +43,7 @@ public abstract class Receiver<TMessage>
     /// </summary>
     /// <param name="cancellationToken">Cancellation token controlling actor shutdown.</param>
     /// <returns>A task that completes when all mailbox messages are processed.</returns>
-    public override async Task RunAsync(CancellationToken cancellationToken)
+    public override async ValueTask RunAsync(CancellationToken cancellationToken)
     {
         try
         {
@@ -109,7 +109,7 @@ public abstract class Receiver<TMessage>
     /// <param name="message">The message to process.</param>
     /// <param name="cancellationToken">Cancellation token for async operations.</param>
     /// <returns>A task that completes when processing is done.</returns>
-    protected abstract Task ProcessMessageAsync(
+    protected abstract ValueTask ProcessMessageAsync(
         TMessage message,
         CancellationToken cancellationToken);
 
@@ -120,7 +120,7 @@ public abstract class Receiver<TMessage>
     /// <param name="exception">The exception that was thrown.</param>
     /// <param name="cancellationToken">Cancellation token for async operations.</param>
     /// <returns>A task that completes when error handling is done.</returns>
-    protected virtual async Task HandleProcessingErrorAsync(
+    protected virtual async ValueTask HandleProcessingErrorAsync(
         TMessage message,
         Exception exception,
         CancellationToken cancellationToken)

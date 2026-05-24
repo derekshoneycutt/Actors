@@ -26,7 +26,7 @@ public sealed class TcpHostActor
         _supervisor = supervisor;
     }
 
-    public override async Task RunAsync(CancellationToken cancellationToken)
+    public override async ValueTask RunAsync(CancellationToken cancellationToken)
     {
         IActorRef<EmptyMessage> thisRef =
             _supervisor.This<TcpHostActor, EmptyMessage>(this);

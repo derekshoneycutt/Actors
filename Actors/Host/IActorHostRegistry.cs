@@ -16,12 +16,12 @@ internal interface IActorHostRegistry
     /// </summary>
     /// <param name="cancellationToken">The cancellation token for processes to signal cancellation.</param>
     /// <returns>A Task that completes when the operation has finished.</returns>
-    Task RunAsync(CancellationToken cancellationToken);
+    ValueTask RunAsync(CancellationToken cancellationToken);
 
     /// <summary>
     /// Stop all registered actors and shut down the supervision process.
     /// </summary>
     /// <param name="cancellationToken">The cancellation token for processes to signal cancellation.</param>
     /// <returns>A Task that completes when the operation has finished.</returns>
-    Task StopAllRegisteredAsync(CancellationToken cancellationToken);
+    ValueTask StopAllRegisteredAsync(CancellationToken cancellationToken);
 }

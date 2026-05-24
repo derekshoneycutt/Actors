@@ -94,7 +94,7 @@ public static class ActorServiceCollectionExtensions
     public static IServiceCollection AddActor<TMessage>(
         this IServiceCollection services,
         string address,
-        Func<LambdaActor<TMessage>, TMessage, ISupervisor, CancellationToken, Task> handler,
+        Func<LambdaActor<TMessage>, TMessage, ISupervisor, CancellationToken, ValueTask> handler,
         IMailboxProvider? mailboxChannelProvider = null,
         Action<SupervisedActorOptions>? configureOptions = null)
     {
@@ -124,7 +124,7 @@ public static class ActorServiceCollectionExtensions
         string address,
         TState initialState,
         Func<LambdaMachine<TMessage, TState>, TMessage, TState, ISupervisor,
-            CancellationToken, Task<TState?>> handler,
+            CancellationToken, ValueTask<TState?>> handler,
         IMailboxProvider? mailboxChannelProvider = null,
         Action<SupervisedActorOptions>? configureOptions = null)
         where TState : MachineState

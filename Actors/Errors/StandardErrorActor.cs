@@ -14,12 +14,12 @@ public class StandardErrorActor
     /// </summary>
     /// <param name="message">Error payload emitted by actor components.</param>
     /// <param name="cancellationToken">Cancellation token controlling write behavior.</param>
-    protected override Task ProcessMessageAsync(
+    protected override ValueTask ProcessMessageAsync(
         StandardError message,
         CancellationToken cancellationToken)
     {
         Console.Error.WriteLine(
             $"[{message.OccurredAtUtc:O}] {message.ActorKind}: {message.Message}{Environment.NewLine}{message.Exception}");
-        return Task.CompletedTask;
+        return ValueTask.CompletedTask;
     }
 }

@@ -23,7 +23,7 @@ public sealed class TcpMessageBufferer
     {
     }
 
-    protected override async Task<TcpMessageBuffererState?> ProcessMessageWithStateAsync(
+    protected override async ValueTask<TcpMessageBuffererState?> ProcessMessageWithStateAsync(
         TcpClientDataReceivedMessage message,
         TcpMessageBuffererState currentState,
         CancellationToken cancellationToken)

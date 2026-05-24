@@ -44,7 +44,7 @@ public abstract class Machine<TMessage, TState>
     /// <param name="message">The input message to process.</param>
     /// <param name="cancellationToken">Cancellation token for async operations.</param>
     /// <returns>A task that completes when message processing is done.</returns>
-    protected sealed override async Task ProcessMessageAsync(
+    protected sealed override async ValueTask ProcessMessageAsync(
         TMessage message,
         CancellationToken cancellationToken)
     {
@@ -70,7 +70,7 @@ public abstract class Machine<TMessage, TState>
     /// <param name="currentState">Snapshot of the current state at message arrival time.</param>
     /// <param name="cancellationToken">Cancellation token for async operations.</param>
     /// <returns>New state to apply, or null for no state change.</returns>
-    protected abstract Task<TState?> ProcessMessageWithStateAsync(
+    protected abstract ValueTask<TState?> ProcessMessageWithStateAsync(
         TMessage message,
         TState currentState,
         CancellationToken cancellationToken);
@@ -82,11 +82,11 @@ public abstract class Machine<TMessage, TState>
     /// <param name="state">The state value that was just committed.</param>
     /// <param name="cancellationToken">Cancellation token for async operations.</param>
     /// <returns>A task that completes when post-commit work is done.</returns>
-    protected virtual Task OnStateUpdatedAsync(TState state, CancellationToken cancellationToken)
+    protected virtual ValueTask OnStateUpdatedAsync(TState state, CancellationToken cancellationToken)
     {
         _ = state;
         _ = cancellationToken;
-        return Task.CompletedTask;
+        return ValueTask.CompletedTask;
     }
 
 }

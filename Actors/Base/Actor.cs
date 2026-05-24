@@ -46,7 +46,7 @@ public abstract class Actor<TMessage>
     /// </summary>
     /// <param name="cancellationToken">Cancellation token controlling actor shutdown.</param>
     /// <returns>A task that completes when all mailbox messages are processed.</returns>
-    public abstract Task RunAsync(CancellationToken cancellationToken);
+    public abstract ValueTask RunAsync(CancellationToken cancellationToken);
 
     /// <summary>
     /// Enqueues an input message into this actor's mailbox.
@@ -54,9 +54,9 @@ public abstract class Actor<TMessage>
     /// <param name="message">Message to enqueue for processing.</param>
     /// <param name="cancellationToken">Cancellation token controlling enqueue behavior.</param>
     /// <returns>A task that completes when the message is accepted.</returns>
-    public Task SendAsync(TMessage message, CancellationToken cancellationToken)
+    public ValueTask SendAsync(TMessage message, CancellationToken cancellationToken)
     {
-        return _mailbox.Writer.WriteAsync(message, cancellationToken).AsTask();
+        return _mailbox.Writer.WriteAsync(message, cancellationToken);
     }
 
     /// <summary>

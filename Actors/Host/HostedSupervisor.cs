@@ -83,7 +83,7 @@ public class HostedSupervisor
     /// </summary>
     /// <param name="cancellationToken">The cancellation token for processes to signal cancellation.</param>
     /// <returns>A Task that completes when the operation has finished.</returns>
-    public async Task StopAllRegisteredAsync(CancellationToken cancellationToken)
+    public async ValueTask StopAllRegisteredAsync(CancellationToken cancellationToken)
     {
         List<SupervisedRunningActorState> states = [.. HostedStates.Select(kvp => kvp.Value)];
         await CancelAllActorsAsync().ConfigureAwait(false);
